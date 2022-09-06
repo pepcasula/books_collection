@@ -25,4 +25,8 @@ public class Library {
             return "Stock is full, the book can't be added!";
         }
     }
+
+    public void removeBook(Books book){
+        this.collection.remove(book);
+    }
 }

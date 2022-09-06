@@ -11,7 +11,7 @@ public class LibraryTest {
     Books book4;
     Books book5;
     Library publicLibrary;
-    Library myReadings;
+    Borrower myReadings;
 
     @Before
     public void setUp(){
@@ -21,7 +21,7 @@ public class LibraryTest {
         book4 = new Books("The Zen and the art of walking on the water", "Chris Jesus", "Biography");
         book5 = new Books("The 100 greatest Devil's Grip players of all times and their techniques", "Peppino Casula", "Sport");
         publicLibrary = new Library("Public Library", 4);
-        myReadings = new Library("My readings", 2);
+        myReadings = new Borrower("Peppino Casula", 2);
         publicLibrary.addBook(book1);
         publicLibrary.addBook(book2);
         publicLibrary.addBook(book3);
@@ -42,5 +42,17 @@ public class LibraryTest {
     public void canCheckStockFull(){
         publicLibrary.addBook(book4);
         assertEquals("Stock is full, the book can't be added!", publicLibrary.addBook(book5));
+    }
+
+    @Test
+    public void canRemoveBook(){
+        publicLibrary.removeBook(book1);
+        assertEquals(2, publicLibrary.countBooks());
+    }
+
+    @Test
+    public void canBorrowBook(){
+        myReadings.borrowFromLibrary(publicLibrary, book1);
+        assertEquals(1, myReadings.countMyBooks());
     }
 }
